@@ -1,5 +1,8 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_mapbox_navigation/flutter_mapbox_navigation.dart';
+import 'package:mapbox_tutorial/turn_by_turn.dart';
 
 void main() {
   runApp(const MyApp());
@@ -16,7 +19,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: const MapView(),
+      home: const TurnByTurn(),
     );
   }
 }
@@ -47,7 +50,6 @@ class _MapViewState extends State<MapView> {
     MapBoxNavigation.instance.registerRouteEventListener(_onRouteEvent);
   }
 
-
   @override
   void initState() {
     initialize();
@@ -62,7 +64,7 @@ class _MapViewState extends State<MapView> {
 
   @override
   Widget build(BuildContext context) {
-    return  Scaffold(
+    return Scaffold(
       body: Column(
         children: [
           SizedBox(
@@ -85,10 +87,8 @@ class _MapViewState extends State<MapView> {
   }
 
   Future<void> _onRouteEvent(e) async {
-
     _distanceRemaining = await MapBoxNavigation.instance.getDistanceRemaining();
     _durationRemaining = await MapBoxNavigation.instance.getDurationRemaining();
-
     switch (e.eventType) {
       case MapBoxEvent.progress_change:
         var progressEvent = e.data as RouteProgressEvent;

@@ -14,6 +14,19 @@ pluginManagement {
         google()
         mavenCentral()
         gradlePluginPortal()
+        maven {
+          url 'https://api.mapbox.com/downloads/v2/releases/maven' // new one
+          authentication {
+            basic(BasicAuthentication)
+          }
+          credentials {
+            // Do not change the username below.
+            // This should always be `mapbox` (not your username).
+            username = "mapbox"
+            // Use the secret token you stored in gradle.properties as the password
+            password = "sk.eyJ1IjoiYW1idS0yNCIsImEiOiJjbHVlMXl3bDIxaHg4Mmxxbm13cDQwdGs4In0.nrKf-vTXx85fCmwXqT06Jw"
+          }
+        }
     }
 }
 
